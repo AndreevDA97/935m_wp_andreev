@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>Работа №1</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<style type="text/css">
+		body { padding: 25px; }
+		label { display: block; }
+		table { border-collapse: collapse; }
+		tr { height: 50px; }
+		td, th {
+			border: 1px solid #000;
+			width: 50px;
+		}
+		.widthfix {
+			visibility: hidden;
+			height: 0;
+		}
+		.blue { background-color: blue; }
+		.green { background-color: green; }
+		.red { background-color: red; }
+		.yellow { background-color: yellow; }
+	</style>
+</head>
+
+<body>
+	<p><a href="index.html">Главная страница</a></p>
+
+	<h2>Задание 1.</h2>
+	<table>
+		<tr>
+			<td rowspan="2" colspan="2" class="blue"></td>
+			<td rowspan="2" colspan="3"></td>
+			<td rowspan="2" colspan="5"></td>
+			<td rowspan="2" colspan="3"></td>
+		</tr>
+		<tr></tr>
+		<tr>
+			<td rowspan="4" colspan="1"></td>
+			<td rowspan="4" colspan="1"></td>
+			<td rowspan="2" colspan="8" class="green"></td>
+			<td colspan="3" class="red"></td>
+		</tr>
+		<tr>
+			<td colspan="3"></td>
+		</tr>
+		<tr>
+			<td rowspan="2" colspan="6"></td>
+			<td rowspan="2"></td>
+			<td rowspan="2" class="yellow"></td>
+			<td rowspan="2" colspan="3"></td>
+		</tr>
+		<tr></tr>
+		<tr class="widthfix">
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+	</table>
+
+	<h2>Задание 2.</h2>
+	<form action="">
+		<p>
+			<label>Фамилия Имя Отчество</label>
+			<input type="text" />
+		</p>
+		<p>
+			<label>Дата рождения</label>
+			<input type="text" />
+		</p>
+		<p>
+			<label>Телефон</label>
+			<input type="text" />
+		</p>
+		<p>
+			<label>E-mail</label>
+			<input type="text" />
+		</p>
+		<p>
+			<label>Должность</label>
+			<input type="text" />
+		</p>
+		<p>
+			<label>Желаемая зарплата</label>
+			<input type="text" />
+		</p>
+		<p>
+			<label>График работы</label>
+			<select>
+				<option value="0" selected="selected">Полный день</option>
+				<option value="1">Сменный график</option>
+				<option value="2">Гибкий график</option>
+				<option value="3">Удаленная работа</option>
+				<option value="4">Вахтовый метод</option>
+			</select>
+		</p>
+		<p>
+			<label>Готовность к командировкам <input type="checkbox" /></label>
+		</p>
+		<p>
+			<label>Дополнительная информация</label>
+			<textarea rows="3" cols="24"></textarea>
+		</p>
+		<p><input type="submit" value="Отправить форму" /></p>
+	</form>
+</body>
+
+</html>

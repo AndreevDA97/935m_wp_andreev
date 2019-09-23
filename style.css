@@ -1,0 +1,194 @@
+/* Базовые стили */
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+html, body {
+	background: #00bdff url('images/design/bg.jpg');
+	height: 100%;
+}
+
+/* Основа(лист) */
+#sheet {
+	width: 900px; /* ширина листа */
+	margin: 0 auto; /* внешний отступ сверху и снизу листа */
+	font-family: Calibri; /* шрифты текста в листе */
+	color: #555; /* дефолтный цвет текста в листе */
+	padding: 0; /* внутренний отступ листа */
+	/* Тень */
+	-webkit-box-shadow: 0 0 25px #7e8a98; /* Тень, для Safari и Chrome */
+	-moz-box-shadow: 0 0 25px #7e8a98; /* Тень, для Firefox */
+	box-shadow: 0 0 25px #7e8a98; /* Тень, параметры */
+	background: #fff; /* фон листа */
+}
+
+/* Макет */
+#container {
+	width: 900px; /* Ширина макета */
+}
+
+#header {
+	width: 900px;
+	height: 180px;
+	background: url('images/design/header.jpg'); /* Цвет фона */
+	color: #000; /* Цвет текста */
+}
+
+#content {
+	float: right; /* Обтекание по правому краю */
+	width: 700px; /* Ширина левой колонки */
+	padding: 0 10px 10px 10px; /* Поля вокруг текста */
+	border-top: 2px solid #ccc; /* Линия сверху */
+	border-left: 2px solid #eee; /* Линия справа */
+	background: #fff; /* Цвет фона левой колонки */
+}
+
+#sidebar {
+	float: left; /* Обтекание по левому краю */
+	width: 178px; /* Ширина */
+	padding: 0;
+	border-top: 2px solid #ccc; /* Линия сверху */
+	border-bottom: 2px solid #eee; /* Линия снизу */
+	background: #eee; /* Цвет фона правой колонки */
+}
+
+#footer {
+	width: 890px;
+	color: #000; /* Цвет текста */
+	padding: 5px; /* Отступы вокруг текста */
+	border-top: 2px solid #eee; /* Линия сверху */
+	border-bottom: 4px double #ccc; /* Линия снизу */
+ 
+	/* Градиент */
+	background: #e5f0fc; /* Old browsers */
+	background: -moz-linear-gradient(left, #e5f0fc 0%, #eeeeee 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#e5f0fc), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left, #e5f0fc 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left, #e5f0fc 0%,#eeeeee 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left, #e5f0fc 0%,#eeeeee 100%); /* IE10+ */
+	background: linear-gradient(left, #e5f0fc 0%,#eeeeee 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5f0fc', endColorstr='#eeeeee',GradientType=1 ); /* IE6-9 */
+}
+
+/* Вертикальное меню */
+.nav {
+	line-height: 1.5;
+	width: 178px;
+}
+ 
+.vertical-menu {
+	background: #fff;
+	width: 178px; 
+}
+
+.vertical-menu h4 {
+	color: #000;
+	font-size: 15px;
+	font-weight: 500;
+	padding: 7px 15px;
+	margin: 0;
+	background: #ccc;
+	
+	/* Градиент */
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top, #ffffff 0%, #f1f1f1 50%, #ffffff 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f1f1f1), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ffffff 0%,#f1f1f1 50%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ffffff 0%,#f1f1f1 50%,#ffffff 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ffffff 0%,#f1f1f1 50%,#ffffff 100%); /* IE10+ */
+	background: linear-gradient(top, #ffffff 0%,#f1f1f1 50%,#ffffff 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+}
+
+.vertical-menu h4 a {
+	color: #000;
+	display: block;
+	text-decoration: none;
+	width: 178px;
+}
+
+/* Контент */
+h1 {
+	font-size: 50px;
+	margin: 0 0 0 0;
+	letter-spacing: -1px;
+}
+
+h2 {
+	font-size: 34px;
+	margin: 0 0 0 0;
+}
+
+h3 {
+	font-size: 24px;
+	margin: 5px 0 0 0;
+}
+
+h4 {
+	font-size: 20px;
+	margin: 15px 0 0 0;
+}
+
+h5 {
+	font-size: 18px;
+	margin: 15px 0 0 0;
+}
+
+h6 {
+font-size: 12px;
+	margin: 15px 0 0 0;
+}
+
+p {
+	font-size: 18px;
+	line-height: 22px;
+	margin: 0 0 1px 0;
+}
+
+a {
+	color: #069;
+	padding: 0 0 0 0;
+	text-decoration: underline;
+}
+
+a:hover {
+	color: #c00;
+	text-decoration: none;
+}
+
+#content img {
+	width: 100%;
+}
+
+.line {
+	clear: both;
+	border-bottom: 2px #eee dashed;
+}
+
+.clear { 
+	clear: both; /* Отмена обтекания */ 
+}
+
+/* Дополнительно */
+#header h1{
+	font-family: fantasy;
+	font-size: 50px;
+	margin: 0 0 0 0;
+	letter-spacing: -1px;
+	text-shadow: 0px -20px 2px rgba(0,0,0,0.1);
+}
+
+#header a {
+	color: #069;
+	padding: 0 0 0 0;
+	text-decoration: none;
+}
+
+#header a:hover {
+	text-decoration: none;
+}
+
+.center {
+	text-align: center;
+}
