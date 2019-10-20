@@ -10,7 +10,7 @@ html, body {
 }
 
 /* Основа(лист) */
-#sheet {
+.sheet {
 	width: 900px; /* ширина листа */
 	margin: 0 auto; /* внешний отступ сверху и снизу листа */
 	font-family: Calibri; /* шрифты текста в листе */
@@ -24,18 +24,18 @@ html, body {
 }
 
 /* Макет */
-#container {
+.container {
 	width: 900px; /* Ширина макета */
 }
 
-#header {
+.header {
 	width: 900px;
 	height: 180px;
 	background: url('images/design/header.jpg'); /* Цвет фона */
 	color: #000; /* Цвет текста */
 }
 
-#content {
+.content {
 	float: right; /* Обтекание по правому краю */
 	width: 700px; /* Ширина левой колонки */
 	padding: 0 10px 10px 10px; /* Поля вокруг текста */
@@ -44,7 +44,7 @@ html, body {
 	background: #fff; /* Цвет фона левой колонки */
 }
 
-#sidebar {
+.sidebar {
 	float: left; /* Обтекание по левому краю */
 	width: 178px; /* Ширина */
 	padding: 0;
@@ -53,7 +53,7 @@ html, body {
 	background: #eee; /* Цвет фона правой колонки */
 }
 
-#footer {
+.footer {
 	width: 890px;
 	color: #000; /* Цвет текста */
 	padding: 5px; /* Отступы вокруг текста */
@@ -157,8 +157,16 @@ a:hover {
 	text-decoration: none;
 }
 
-#content img {
+.content img {
 	width: 100%;
+}
+
+.content table, .content td {
+	border: 1px solid gray;
+}
+
+.content table tr td:last-child {
+	word-break: break-word;
 }
 
 .line {
@@ -171,7 +179,7 @@ a:hover {
 }
 
 /* Дополнительно */
-#header h1{
+.header h1{
 	font-family: fantasy;
 	font-size: 50px;
 	margin: 0 0 0 0;
@@ -179,13 +187,13 @@ a:hover {
 	text-shadow: 0px -20px 2px rgba(0,0,0,0.1);
 }
 
-#header a {
+.header a {
 	color: #069;
 	padding: 0 0 0 0;
 	text-decoration: none;
 }
 
-#header a:hover {
+.header a:hover {
 	text-decoration: none;
 }
 

@@ -1,3 +1,6 @@
+<?php
+	include "includes/lib.inc.php";
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -9,21 +12,10 @@
 </head>
 
 <body>
-	<div id="sheet">
-		<div id="container">
-			<div id="header">
-				<table width="900px" cellspacing="0" cellpadding="0">
-					<tr>
-						<td align="left" style="padding: 0 0 0 20px;">
-							<img src="images/design/logo.png" alt="logo" />
-						</td>
-						<td align="right" style="padding: 0 200px 0 0;">
-							<h1><a href="index.html">г. Касимов, 867 лет</a></h1>
-						</td>
-					</tr>
-				</table>
-			</div> <!-- header -->
-			<div id="content">
+	<div class="sheet">
+		<div class="container">
+			<?php include "includes/top.inc.php" ?>
+			<div class="content">
 				<h2>Главная</h2>
 				<div class="line"></div>
 				<div class="center">
@@ -42,21 +34,9 @@
 				</div>
 				<div style="height: 0px;"></div>
 			</div> <!-- content -->
-			<div id="sidebar">
-				<div class="nav">
-					<div class="vertical-menu">
-						<h4><a href="index.html">Главная</a></h4>
-					</div>
-
-					<div class="vertical-menu">
-						<h4><a href="lab_rab1.html">Работа №1</a></h4>
-					</div>
-				</div>
-			</div> <!-- sidebar -->
+			<?php include "includes/menu.inc.php" ?>
 			<div class="clear"></div> <!-- Отмена обтекания -->
-			<div id="footer">
-				<div class="center">Вариант №1 &copy; ст. гр. 935М Андреев Дмитрий. 2019 г.</div>
-			</div> <!-- footer -->
+			<?php include "includes/bottom.inc.php" ?>
 		</div> <!-- container -->
 	</div> <!-- sheet -->
 </body>
