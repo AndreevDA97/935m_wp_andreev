@@ -1,5 +1,15 @@
 <?php
-	include "includes/lib.inc.php";
+	ini_set('error_reporting', E_ALL & ~E_NOTICE);
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+
+	$page = empty($_GET['page']) ?
+		'home' : $_GET['page']; // одностраничный интерфейс
+	header('Cache-control: no-store'); // запрет кэширования
+	header('Content-Type: text/html; charset=utf-8'); // указать кодировку
+	
+	include 'includes/lib.inc.php';
+	require 'includes/auth.inc.php';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -15,6 +25,23 @@
 	<div class="sheet">
 		<div class="container">
 			<?php include "includes/top.inc.php" ?>
+			<?php 
+				if ($page == 'catalog') include $page.'.php';
+				else if ($page == 'add') include 'includes/catalog/'.$page.'.php';
+				else if ($page == 'edit') include 'includes/catalog/'.$page.'.php';
+				else if ($page == 'item') include 'includes/catalog/'.$page.'.php';
+				else if ($page == 'lab_rab1') {
+					ob_start();
+					include $page.'.php';
+					$lab_rab1 = ob_get_contents();
+					file_put_contents($page.'.html', $lab_rab1);
+					ob_end_clean();
+					echo $lab_rab1;
+				}
+				else if ($page == 'lab_rab2') include $page.'.php';
+				else if ($page == 'lab_rab3') include $page.'.php';
+				else {
+			?>
 			<div class="content">
 				<h2>Главная</h2>
 				<div class="line"></div>
@@ -34,6 +61,7 @@
 				</div>
 				<div style="height: 0px;"></div>
 			</div> <!-- content -->
+			<?php } ?>
 			<?php include "includes/menu.inc.php" ?>
 			<div class="clear"></div> <!-- Отмена обтекания -->
 			<?php include "includes/bottom.inc.php" ?>

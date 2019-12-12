@@ -108,6 +108,11 @@ html, body {
 	width: 178px;
 }
 
+.vertical-menu h4 a.active {
+	color: #006699;
+	font-weight: bold;
+}
+
 /* Контент */
 h1 {
 	font-size: 50px;
@@ -158,7 +163,7 @@ a:hover {
 }
 
 .content img {
-	width: 100%;
+	width: auto;
 }
 
 .content table, .content td {
@@ -197,6 +202,47 @@ a:hover {
 	text-decoration: none;
 }
 
+.header .auth-row {
+	position: relative;
+	bottom: -65px;
+	display: block;
+	text-align: right;
+	padding: 0 15px;
+}
+.header .auth-tab {
+	display: inline;
+	background: white;
+	border-radius: 5px 5px 0 0;
+	padding: 3px 7px;
+}
+.header .auth-tab form {
+	display: inline;
+}
+
+.linkButton { 
+	background: none;
+	border: none;
+	color: #0066ff;
+	cursor: pointer; 
+}
+
+.sidebar .auth {
+	padding: 10px;
+}
+
+.sidebar .auth form input {
+	width: 100%;
+}
+
+label.error {
+	color: red;
+	font-size: 15px;
+}
+
 .center {
 	text-align: center;
+}
+
+.center table {
+	margin: auto;
 }

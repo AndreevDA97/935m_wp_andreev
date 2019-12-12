@@ -1,10 +1,26 @@
 <?php
 	$menu = array(
-		"Главная"=>"index.php", 
-		"Работа №1"=>"lab_rab1.html",
-		"Работа №2"=>"lab_rab2.php");
+		"Главная"=>"/index.php?page=home", 
+		"Каталог"=>"/index.php?page=catalog",
+		"Работа №1"=>"/index.php?page=lab_rab1",
+		"Работа №2"=>"/index.php?page=lab_rab2",
+		"Работа №3"=>"/index.php?page=lab_rab3",
+	);
 ?>	
 
-			<div class="sidebar">
-				<?php getMenu($menu) ?>
-			</div> <!-- sidebar -->
+<div class="sidebar">
+	<?php if (!IS_AUTH) { ?>
+	<div class="auth">
+		<p>Вход в систему</p>
+		<form method="POST">
+		<input type="text" name="login"><br>
+		<input type="password" name="password"><br>
+		<label class="error"><?=$auth_error?></label>
+		<input type="submit" value="Войти"><br>
+		</form>
+	</div>
+	<?php }
+		unset($_SESSION['auth_error']);
+		getMenu($menu);
+	?>
+</div> <!-- sidebar -->
