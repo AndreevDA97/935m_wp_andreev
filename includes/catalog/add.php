@@ -28,8 +28,15 @@
 			header("Location: /index.php?page=catalog");
 			exit;
 		}
-		else $error = 'Полностью заполните форму';
+		else {
+			$_SESSION['error'] = 'Полностью заполните форму';
+			header("Location: /index.php?page=add");
+			exit;
+		}
 	}
+	
+	$error = safestr(@$_SESSION['error']);
+	unset($_SESSION['error']);
 ?>
 <div class="content">
 	<h2>Добавление статьи</h2>

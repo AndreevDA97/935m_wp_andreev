@@ -26,21 +26,22 @@
 		<div class="container">
 			<?php include "includes/top.inc.php" ?>
 			<?php 
-				if ($page == 'catalog') include $page.'.php';
-				else if ($page == 'add') include 'includes/catalog/'.$page.'.php';
-				else if ($page == 'edit') include 'includes/catalog/'.$page.'.php';
-				else if ($page == 'item') include 'includes/catalog/'.$page.'.php';
-				else if ($page == 'lab_rab1') {
-					ob_start();
-					include $page.'.php';
-					$lab_rab1 = ob_get_contents();
-					file_put_contents($page.'.html', $lab_rab1);
-					ob_end_clean();
-					echo $lab_rab1;
-				}
-				else if ($page == 'lab_rab2') include $page.'.php';
-				else if ($page == 'lab_rab3') include $page.'.php';
-				else {
+				switch ($page) {
+					case 'catalog': include $page.'.php'; break;
+					case 'add': include 'includes/catalog/'.$page.'.php'; break;
+					case 'edit': include 'includes/catalog/'.$page.'.php'; break;
+					case 'item': include 'includes/catalog/'.$page.'.php'; break;
+					case 'lab_rab1': 
+						ob_start();
+						include $page.'.php';
+						$lab_rab1 = ob_get_contents();
+						file_put_contents($page.'.html', $lab_rab1);
+						ob_end_clean();
+						echo $lab_rab1;
+						break;
+					case 'lab_rab2': include $page.'.php'; break;
+					case 'lab_rab3': include $page.'.php'; break;
+					default: 
 			?>
 			<div class="content">
 				<h2>Главная</h2>
@@ -61,7 +62,10 @@
 				</div>
 				<div style="height: 0px;"></div>
 			</div> <!-- content -->
-			<?php } ?>
+			<?php
+						break;
+				}
+			?>
 			<?php include "includes/menu.inc.php" ?>
 			<div class="clear"></div> <!-- Отмена обтекания -->
 			<?php include "includes/bottom.inc.php" ?>
