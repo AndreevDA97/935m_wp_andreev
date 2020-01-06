@@ -4,24 +4,24 @@
 		exit;
 	}
 	$id = safestr($_GET['id']);
-	$item = $_SESSION['Items'][$id];
+	$item = getArticleById($id);
 ?>
 <div class="content">
-	<h2>Просмотр статьи №<?=$id+1?></h2>
+	<h2>Просмотр статьи №<?=$id?></h2>
 	<div class="line"></div>
 	<br>
 	<form method='POST'>
-		<p>Изображение: 
+		<p><b>Изображение:</b> 
 		<?php 
-			if (isset($item['image']) && file_exists($_SERVER['DOCUMENT_ROOT'].$item['image']))
-				echo '<br><img src="'.$item['image'].'">'; 
+			if (isset($item['IMAGE']) && file_exists($_SERVER['DOCUMENT_ROOT'].$item['IMAGE']))
+				echo '<br><img src="'.$item['IMAGE'].'">'; 
 			else
 				echo 'Отсутствует';
 		?>
 		</p>
-		<p>Название статьи: <?=$item['name']?></p>
-		<p>Краткое описание: <?=$item['anotation']?></p>
-		<p>Полное описание: <?=$item['description']?></p>
+		<p><b>Название статьи:</b> <?=$item['NAME']?></p>
+		<p><b>Краткое описание:</b> <?=$item['ANOTATION']?></p>
+		<p><b>Полное описание:</b> <?=$item['DESCRIPTION']?></p>
 	</form>
 	<button onclick="location.href='index.php?page=edit&id=<?=$id?>'">
 		Редактировать статью

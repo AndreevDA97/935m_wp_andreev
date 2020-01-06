@@ -3,12 +3,14 @@
 	{
 		include 'includes/lib.inc.php';
 		session_start();
+		// Получение удаляемой записи
+		$article = getArticleById($_GET['delete']);
 		// Удаление загруженного изображения
-		$path = $_SERVER['DOCUMENT_ROOT'].$_SESSION['Items'][$_GET['delete']]['image'];
-		if (file_exists($path))
+		$path = $_SERVER['DOCUMENT_ROOT'].$article['IMAGE'];
+		if (!empty($article['IMAGE']) && file_exists($path))
 			unlink($path);
-		// Удаление сессионной записи
-		unset($_SESSION['Items'][$_GET['delete']]);
+		// Удаление записи
+		deleteArticle($_GET['delete']);
 		header("Location: /index.php?page=catalog");
 		exit;
 	}
@@ -18,19 +20,20 @@
 	<div class="line"></div>
 	<br>
 <?php
-	if (!empty($_SESSION['Items']))
+	$articles = getArticles();
+	if (!empty($articles))
 	{
-		foreach ($_SESSION['Items'] as $id => $item)
+		foreach ($articles as $id => $item)
 		{
 ?>
-			<p>№<?=$id+1?></p>
+			<p>№<?=$item['ID']?></p>
 			<table style="width:100%">
 			<tr>
 				<th>Изображение</th>
 				<td>
 				<?php 
-					if (isset($item['image']) && file_exists($_SERVER['DOCUMENT_ROOT'].$item['image']))
-						echo '<br><img src="'.$item['image'].'">'; 
+					if (isset($item['IMAGE']) && file_exists($_SERVER['DOCUMENT_ROOT'].$item['IMAGE']))
+						echo '<br><img src="'.$item['IMAGE'].'">'; 
 					else
 						echo 'Отсутствует';
 				?>
@@ -38,19 +41,19 @@
 			</tr>
 			<tr>
 				<th>Название</th>
-				<td><?=$item['name']?></td>
+				<td><?=$item['NAME']?></td>
 			</tr>
 			<tr>
 				<th>Краткое описание</th>
-				<td><?=$item['anotation']?></td>
+				<td><?=$item['ANOTATION']?></td>
 			</tr>
 			<tr>
 				<th>Действия</th>
 				<td>
-					<button onclick="location.href='index.php?page=item&id=<?=$id?>'">
+					<button onclick="location.href='index.php?page=item&id=<?=$item['ID']?>'">
 						Перейти к просмотру
 					</button>
-					<button onclick="location.href='catalog.php?delete=<?=$id?>'">
+					<button onclick="location.href='catalog.php?delete=<?=$item['ID']?>'">
 						Удалить
 					</button>
 				</td>

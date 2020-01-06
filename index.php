@@ -27,6 +27,7 @@
 			<?php include "includes/top.inc.php" ?>
 			<?php 
 				switch ($page) {
+					case 'register': include $page.'.php'; break;
 					case 'catalog': include $page.'.php'; break;
 					case 'add': include 'includes/catalog/'.$page.'.php'; break;
 					case 'edit': include 'includes/catalog/'.$page.'.php'; break;
@@ -41,6 +42,7 @@
 						break;
 					case 'lab_rab2': include $page.'.php'; break;
 					case 'lab_rab3': include $page.'.php'; break;
+					case 'lab_rab4': include $page.'.php'; break;
 					default: 
 			?>
 			<div class="content">

@@ -3,28 +3,24 @@
 	{
 		include '../lib.inc.php';
 		session_start();
-		if (!empty($_POST['name']) && !empty($_POST['anotation']) 
-			&& !empty($_POST['description']))
+		if (checkArticleFromPost())
 		{
-			if (!isset($_SESSION['Items']))
-				$_SESSION['Items'] = array();
-			
 			$item = array();
-			$item['name'] = safestr($_POST['name']);
-			$item['anotation'] = safestr($_POST['anotation']);
-			$item['description'] = safestr($_POST['description']);
+			$item['NAME'] = safestr($_POST['name']);
+			$item['ANOTATION'] = safestr($_POST['anotation']);
+			$item['DESCRIPTION'] = safestr($_POST['description']);
 			if (!empty($_FILES['image']['name']))
 			{
 				$name = resize($_FILES['image']);
-				$newid = count($_SESSION['Items']);
+				$newid = getArticleNextId();
 				$newfile = '/images/catalog/'.$newid.'.jpg';
 				$newpath = $_SERVER['DOCUMENT_ROOT'].$newfile;
 				if (copy($name, $newpath))
 					unlink($name);
-				$item['image'] = $newfile;
+				$item['IMAGE'] = $newfile;
 			}
-
-			array_push($_SESSION['Items'], $item);
+			
+			addArticle($item);
 			header("Location: /index.php?page=catalog");
 			exit;
 		}

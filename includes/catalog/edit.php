@@ -8,12 +8,12 @@
 		include '../lib.inc.php';
 		session_start();
 		$id = safestr($_POST['id']);
-		if (isset($_POST['loadimg'])) 
+		if (isset($_POST['load_img'])) 
 		{
 			$item = array();
-			$item['name'] = safestr($_POST['name']);
-			$item['anotation'] = safestr($_POST['anotation']);
-			$item['description'] = safestr($_POST['description']);
+			$item['NAME'] = safestr($_POST['name']);
+			$item['ANOTATION'] = safestr($_POST['anotation']);
+			$item['DESCRIPTION'] = safestr($_POST['description']);
 			$_SESSION['TempItem'] = $item;
 
 			if (!empty($_FILES['image']['name']))
@@ -37,30 +37,29 @@
 		}
 		else if (isset($_POST['save']))
 		{
-			if (!empty($_POST['name']) && !empty($_POST['anotation']) 
-				&& !empty($_POST['description']) && !empty($_POST['image']))
+			if (checkArticleFromPost())
 			{
-				$item = $_SESSION['Items'][$id];
-				$item['name'] = safestr($_POST['name']);
-				$item['anotation'] = safestr($_POST['anotation']);
-				$item['description'] = safestr($_POST['description']);
+				$item = getArticleById($id);
+				$item['NAME'] = safestr($_POST['name']);
+				$item['ANOTATION'] = safestr($_POST['anotation']);
+				$item['DESCRIPTION'] = safestr($_POST['description']);
 				
 				$loaded_image = safestr($_POST['image']);
-				if (isset($loaded_image)) {
+				if (!empty($loaded_image)) {
 					if ($loaded_image == 'empty') {
-						$path = $_SERVER['DOCUMENT_ROOT'].$item['image'];
-						if (file_exists($path))
+						$path = $_SERVER['DOCUMENT_ROOT'].$item['IMAGE'];
+						if (!empty($item['IMAGE']) && file_exists($path))
 							unlink($path);
-						unset($item['image']);
+						unset($item['IMAGE']);
 					} else {
 						$uploadfile = $_SERVER['DOCUMENT_ROOT'].'/images/catalog/'.$id.'.jpg';
 						if (copy($loaded_image, $uploadfile))
 							unlink($loaded_image);
-						$item['image'] = '/images/catalog/'.$id.'.jpg';
+						$item['IMAGE'] = '/images/catalog/'.$id.'.jpg';
 					}
 				}
 
-				$_SESSION['Items'][$id] = $item;
+				updateArticle($id, $item);
 				header("Location: /index.php?page=item&id={$id}");
 				exit;
 			}
@@ -84,21 +83,21 @@
 		unset($_SESSION['TempItem']);
 	}
 	else
-		$item = $_SESSION['Items'][$id];
+		$item = getArticleById($id);
 
 	$error = safestr(@$_SESSION['error']);
 	unset($_SESSION['error']);
 ?>
-<div class="content">
-	<h2>Редактирование статьи №<?=$id+1?></h2>
+<div class="content edit">
+	<h2>Редактирование статьи №<?=$id?></h2>
 	<div class="line"></div>
 	<br>
 	<form action="includes/catalog/edit.php" method="POST" enctype="multipart/form-data">
 		<input type="hidden" value="<?=$id?>" name="id">
-		<p>Название статьи:<input type="text" name="name" value="<?=$item['name']?>"></p>
-		<p>Краткое описание:<input type="text" name="anotation" value="<?=$item['anotation']?>"></p>
-		<p>Полное описание:<textarea name="description"><?=$item['description']?></textarea></p>
-		<p>Изображение:<input name="loadimg" type='submit' value='Загрузить'> <input type="file" name="image"></p>
+		<p><b>Название статьи:</b> <input type="text" name="name" value="<?=$item['NAME']?>"></p>
+		<p><b>Краткое описание:</b> <input type="text" name="anotation" value="<?=$item['ANOTATION']?>"></p>
+		<p><b>Полное описание:</b> <textarea name="description"><?=$item['DESCRIPTION']?></textarea></p>
+		<p><b>Изображение:</b> <input name="load_img" type='submit' value='Загрузить'> <input type="file" name="image"></p>
 		<?php
 			if (isset($loaded_image)) {
 				if ($loaded_image == 'empty') {
@@ -112,8 +111,8 @@
 					echo '<input type="hidden" name="image" value="'.$loaded_image['tmp_name'].'">';
 				}
 			}
-			else if (isset($item['image'])) {
-				echo '<img src="'.$item['image'].'">';
+			else if (isset($item['IMAGE'])) {
+				echo '<img src="'.$item['IMAGE'].'">';
 			}
 		?>
 

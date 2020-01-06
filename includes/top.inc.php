@@ -10,12 +10,12 @@
 					</tr>
 				</table>
 				<div class="auth-row">
-					<?php if (isset($_SESSION['login'])) 
+					<?php if (isset($_SESSION['user_login'])) 
 					{ ?>
 						<div class="auth-tab">
-							Вы вошли под логином - <?=$_SESSION['login']?> (Ваш IP: <?=$_SESSION['ip']?>) / 
+							Вы вошли под логином - <?=$_SESSION['user_login']?> (Ваш IP: <?=$_SESSION['ip']?>) / 
 							<form method="GET">
-								<input type="hidden" name="logout" value="true">
+								<input type="hidden" name="action" value="logout">
 								<input type="submit" value="Выход" class="linkButton">
 							</form>
 						</div>

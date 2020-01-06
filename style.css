@@ -174,6 +174,15 @@ a:hover {
 	word-break: break-word;
 }
 
+.content.edit textarea {
+	width: 100%;
+	height: 150px;
+}
+
+.content.edit input[type="text"] {
+	width: 100%;
+}
+
 .line {
 	clear: both;
 	border-bottom: 2px #eee dashed;
