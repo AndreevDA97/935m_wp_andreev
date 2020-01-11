@@ -294,8 +294,9 @@
 	}
 
 	function checkArticleFromPost() {
+		$nameRegex = "/^[A-Za-zА-Яа-яЁё][\w\sА-Яа-яЁё:-]{2,75}/";
 		return (!empty($_POST['name']) && !empty($_POST['description']) &&
-			!empty($_POST['anotation']));
+			!empty($_POST['anotation']) && preg_match($nameRegex, safestr($_POST['name'])));
 	}
 
 	function getArticleById($id) {
@@ -314,10 +315,17 @@
 
 	function addArticle($article) {
 		global $host, $user, $pass;
-
+		
+		$urlRegex = "~(?:(?:https?|ftp|telnet)://(?:[a-z0-9_-]{1,32}"
+			."(?::[a-z0-9_-]{1,32})?@)?)?(?:(?:[a-z0-9-]{1,128}\.)+(?:com|net|"
+			."org|mil|edu|arpa|gov|biz|info|aero|inc|name|[a-z]{2})|(?!0)(?:(?"
+			."!0[^.]|255)[0-9]{1,3}\.){3}(?!0|255)[0-9]{1,3})(?:/[a-z0-9.,_@%&"
+			."?+=\~/-]*)?(?:#[^ '\"&<>]*)?~i";
+		
 		$name = $article['NAME'];
 		$anotation = $article['ANOTATION'];
-		$description = isset($article['DESCRIPTION']) ? $article['DESCRIPTION'] : '';
+		$description = isset($article['DESCRIPTION']) ? 
+			preg_replace($urlRegex, '', $article['DESCRIPTION']) : '';
 		$image = isset($article['IMAGE']) ? "'".$article['IMAGE']."'" : 'null';
 		$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1';
 		$dbh = ibase_connect($host, $user, $pass);
@@ -326,10 +334,13 @@
 		ibase_query($dbh, $query) or die ("Ошибка доступа к БД: " . ibase_errmsg());
 	}
 
-	function getArticles() {
+	function getArticles($sort_field = false, $first = false, $skip = false) {
 		global $host, $user, $pass;
+		$sort = ($sort_field != false) ? ' ORDER BY '.$sort_field : '';
+		$skip = ($skip != false) ? ' SKIP '.$skip : '';
+		$first = ($first != false) ? ' FIRST '.$first : '';
 		$dbh = ibase_connect($host, $user, $pass);
-		$query = "SELECT * FROM ARTICLE"; 
+		$query = "SELECT $first $skip * FROM ARTICLE $sort";
 		$result = ibase_query($dbh, $query) or die ("Ошибка доступа к БД: " . ibase_errmsg());
 		$articles = array();
 		while ($row = ibase_fetch_assoc($result)) array_push($articles, $row);
@@ -338,11 +349,18 @@
 
 	function updateArticle($id, $article) {
 		global $host, $user, $pass;
-
+		
+		$urlRegex = "~(?:(?:https?|ftp|telnet)://(?:[a-z0-9_-]{1,32}"
+			."(?::[a-z0-9_-]{1,32})?@)?)?(?:(?:[a-z0-9-]{1,128}\.)+(?:com|net|"
+			."org|mil|edu|arpa|gov|biz|info|aero|inc|name|[a-z]{2})|(?!0)(?:(?"
+			."!0[^.]|255)[0-9]{1,3}\.){3}(?!0|255)[0-9]{1,3})(?:/[a-z0-9.,_@%&"
+			."?+=\~/-]*)?(?:#[^ '\"&<>]*)?~i";
+		
 		$name = $article['NAME'];
 		$anotation = $article['ANOTATION'];
 		$user_id = $article['USER_ID'];
-		$description = isset($article['DESCRIPTION']) ? $article['DESCRIPTION'] : '';
+		$description = isset($article['DESCRIPTION']) ? 
+			preg_replace($urlRegex, '', $article['DESCRIPTION']) : '';
 		$image =  isset($article['IMAGE']) ? "'".$article['IMAGE']."'" : 'null';
 
 		$dbh = ibase_connect($host, $user, $pass);
@@ -356,5 +374,35 @@
 		$dbh = ibase_connect($host, $user, $pass);
 		$query = "DELETE FROM ARTICLE WHERE ID = '$id'";
 		ibase_query($dbh, $query)  or die ("Ошибка доступа к БД: " . ibase_errmsg());
+	}
+	
+	function getPageMenu($inPageCount = 2){
+		$maxPagesCount = 2;
+		$count = count(getArticles());
+		$pages = $count / $inPageCount;
+		$count = $pages;
+
+		$elseLink = '';
+		if ($pages > $maxPagesCount) {
+			$count = $maxPagesCount;
+			$skipCount = $maxPagesCount*$inPageCount;
+			$firstCount = $count - $skipCount;
+			$elseLink = "<a href= index.php?page=catalog&skip=".$skipCount."&first=".$firstCount.">>></a>";
+		}
+		$menuLinks = '';
+		
+		for ($i = 0; $i < $count; $i++)
+			$menuLinks .= "<a href=index.php?page=catalog&skip=".($i*$inPageCount)."&first=$inPageCount>".($i+1)."</a>&nbsp;";
+		
+		return "$menuLinks$elseLink";
+	}
+	
+	function searchArticleByField($field = 'NAME', $value) {
+		global $host, $user, $pass;
+		$dbh = ibase_connect($host, $user, $pass);
+		$result = ibase_query($dbh, "SELECT * FROM ARTICLE WHERE $field LIKE '%$value%'") or die ("Сбой при доступе к БД: " . ibase_errmsg());
+		$articles = array();
+		while ($row = ibase_fetch_assoc($result)) array_push($articles, $row);
+		return $articles;
 	}
 ?>

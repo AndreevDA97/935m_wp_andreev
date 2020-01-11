@@ -43,6 +43,7 @@
 					case 'lab_rab2': include $page.'.php'; break;
 					case 'lab_rab3': include $page.'.php'; break;
 					case 'lab_rab4': include $page.'.php'; break;
+					case 'lab_rab5': include $page.'.php'; break;
 					default: 
 			?>
 			<div class="content">

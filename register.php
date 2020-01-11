@@ -6,15 +6,20 @@
 		{
 			if ($_POST['password_main'] == $_POST['password_confirm'])
 			{
-				$password = md5(safestr($_POST['password_main']).SITE_SALT);
-				$name = safestr($_POST['user_name']);
-				if (isset($_POST['email'])) $email = safestr($_POST['email']);
-				if (isset($_POST['address'])) $address = safestr($_POST['address']);
-				if (isset($_POST['phone'])) $phone = safestr($_POST['phone']);
-				addUser($name, $password, $phone, $email, $address);
-				session_start(); $_SESSION['reg_success'] = $name;
-				header("Location: index.php?page=register");
-				exit;
+				$email = safestr($_POST['email']);
+				$emailRegex = "/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z\-\.]+$/";
+				if (preg_match($emailRegex, $email))
+				{
+					$password = md5(safestr($_POST['password_main']).SITE_SALT);
+					$name = safestr($_POST['user_name']);
+					if (isset($_POST['address'])) $address = safestr($_POST['address']);
+					if (isset($_POST['phone'])) $phone = safestr($_POST['phone']);
+					addUser($name, $password, $phone, $email, $address);
+					session_start(); $_SESSION['reg_success'] = $name;
+					header("Location: index.php?page=register");
+					exit;
+				}
+				else $error = 'Адрес эл. почты не корректен!';
 			}
 			else $error = 'Пароли не совпадают!';
 		}

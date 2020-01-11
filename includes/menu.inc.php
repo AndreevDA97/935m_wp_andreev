@@ -6,6 +6,7 @@
 		"Работа №2"=>"/index.php?page=lab_rab2",
 		"Работа №3"=>"/index.php?page=lab_rab3",
 		"Работа №4"=>"/index.php?page=lab_rab4",
+		"Работа №5"=>"/index.php?page=lab_rab5"
 	);
 ?>	
 
